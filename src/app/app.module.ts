@@ -9,9 +9,16 @@ import { AppMaterialModule } from './modules/app-material.module';
 import { AppComponent } from './app.component';
 import { BookNavComponent } from './book-nav/book-nav.component';
 import { AppRoutingModule } from './modules/app-routing.module';
+import { BookComponent } from './book-list/book/book.component';
+import { BookService } from './services/book.service';
 
 @NgModule({
-  declarations: [AppComponent, BookNavComponent, BookListComponent],
+  declarations: [
+    AppComponent,
+    BookNavComponent,
+    BookListComponent,
+    BookComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -19,7 +26,7 @@ import { AppRoutingModule } from './modules/app-routing.module';
     AppMaterialModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [BookService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
