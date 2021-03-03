@@ -1,22 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { BookModel, BookService } from 'src/app/services/book.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BookModel } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss'],
 })
-export class BookComponent implements OnInit {
-  public myBook: BookModel;
+export class BookComponent {
+  @Input() book: BookModel;
 
-  constructor(public myBookService: BookService) {}
+  @Output() bookOut = new EventEmitter<[number, string]>();
 
-  ngOnInit() {
-    this.myBook = this.myBookService.getAll();
-  }
-
-  onBuy(name: string) {
-    console.log(this.myBook.name);
-    console.log(name);
+  onBuy(id: string) {
+    return this.bookOut.emit([this.book.price, id]);
   }
 }

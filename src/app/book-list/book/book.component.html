@@ -1,8 +1,8 @@
 <mat-card class="dashboard-card">
   <mat-card-header>
     <mat-card-title>
-      {{ myBook.name }}
-      <button
+      {{ book.name }}
+      <!-- <button
         mat-icon-button
         class="more-button"
         [matMenuTriggerFor]="menu"
@@ -13,14 +13,16 @@
       <mat-menu #menu="matMenu" xPosition="before">
         <button mat-menu-item>Expand</button>
         <button mat-menu-item>Remove</button>
-      </mat-menu>
+      </mat-menu> -->
     </mat-card-title>
   </mat-card-header>
   <mat-card-content class="dashboard-card-content">
-    <div>{{ myBook.description }}</div>
+    <div>Quantity:{{ book.quantity }}</div>
+    <div>{{ book.description }}</div>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="onBuy(myBook.name)">
+  <mat-card-actions class="dashboard-card-actions">
+    <div>${{ book.price }}</div>
+    <button mat-raised-button color="primary" (click)="onBuy(book.id)">
       Buy
     </button>
   </mat-card-actions>
