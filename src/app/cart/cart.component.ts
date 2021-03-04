@@ -6,21 +6,17 @@ import { BookModel, BookService } from '../services/book.service';
 import { CartService } from '../services/cart.service';
 
 @Component({
-  selector: 'app-book-list',
-  templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.scss'],
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.scss'],
 })
-export class BookListComponent implements OnInit {
-  public price = 0;
-
-  public quantity = 0;
-
+export class CartComponent implements OnInit {
   public cards: Observable<BookModel[]>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public myBookService: BookService,
-    public myCartService: CartService
+    public myCartService: CartService,
+    public myBookService: BookService
   ) {}
 
   ngOnInit() {
@@ -33,15 +29,24 @@ export class BookListComponent implements OnInit {
       .observe(Breakpoints.Handset)
       .pipe(
         map(({ matches }) =>
-          matches ? this.myBookService.getAll() : this.myBookService.getAll()
+          matches ? this.myCartService.getAll() : this.myCartService.getAll()
         )
       );
 
-  sumPrise(book: BookModel) {
-    this.price += book.price;
-    this.quantity += 1;
-    this.myCartService.addCartItem({ ...book, quantity: 1 });
-    this.myBookService.removeQuantityBook(book.id);
+  addBook(book: BookModel) {
+    this.myCartService.addCartItem(book);
     this.cards = this.cardsInit();
+  }
+
+  minesBook(book: BookModel) {
+    this.myCartService.minusCartItem(book);
+    this.cards = this.cardsInit();
+    this.myBookService.addQuantityBook(book.id);
+  }
+
+  removeBook(book: BookModel) {
+    this.myCartService.removeCartItem(book);
+    this.cards = this.cardsInit();
+    this.myBookService.addAllQuantityBook(book.id, book.quantity);
   }
 }

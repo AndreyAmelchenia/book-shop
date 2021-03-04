@@ -1,0 +1,13 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Cart</h1>
+  <mat-grid-list cols="3">
+    <mat-grid-tile *ngFor="let card of cards | async" colspan="3">
+      <app-cart-item
+        [book]="card"
+        (addItem)="addBook($event)"
+        (minesItem)="minesBook($event)"
+        (removeItem)="removeBook($event)"
+      ></app-cart-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

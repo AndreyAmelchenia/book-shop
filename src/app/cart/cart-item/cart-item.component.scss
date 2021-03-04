@@ -1,0 +1,51 @@
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  justify-content: space-between;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+  > div{
+    display: flex;
+    align-items: center;
+    > h2{
+      margin: 0;
+    }
+  }
+}
+.dashboard-card-actions{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  > h1{
+    margin-right: 20px;
+    padding: 10px;
+    color: burlywood;
+    background-color: rgb(180, 94, 94);
+    border-radius: 10px;
+    > span{
+      color: aliceblue;
+    }
+  }
+}
+mat-card-title > h1{
+  padding: 10px;
+    color: aliceblue;
+    background-color: rgb(180, 94, 94);
+    border-radius: 10px;
+}
