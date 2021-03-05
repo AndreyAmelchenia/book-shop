@@ -84,17 +84,13 @@ export class BookService {
 
   removeQuantityBook(id: string): void {
     this.myBooks = this.myBooks.map((el) =>
-      el.id === id
-        ? { ...el, quantity: el.quantity - 1, isAvailable: !!(el.quantity - 1) }
-        : el
+      el.id === id ? { ...el, quantity: el.quantity - 1, isAvailable: !!(el.quantity - 1) } : el,
     );
   }
 
   addQuantityBook(id: string): void {
     this.myBooks = this.myBooks.map((el) =>
-      el.id === id
-        ? { ...el, quantity: el.quantity + 1, isAvailable: true }
-        : el
+      el.id === id ? { ...el, quantity: el.quantity + 1, isAvailable: true } : el,
     );
   }
 
@@ -106,7 +102,11 @@ export class BookService {
             quantity: el.quantity + quantity,
             isAvailable: true,
           }
-        : el
+        : el,
     );
+  }
+
+  quantityBook(id: string): number {
+    return this.myBooks.find((el) => el.id === id).quantity;
   }
 }

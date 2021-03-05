@@ -10,6 +10,7 @@ export class CartService {
       category: 'novel',
       createDate: 12125235,
       quantity: 1,
+      isAvailable: true,
     },
   ];
 
@@ -19,13 +20,15 @@ export class CartService {
     this.myCartItems = this.myCartItems.filter((el) => el.id !== book.id);
   }
 
-  addCartItem(book: BookModel): void {
+  addCartItem(book: BookModel, quantity: number): void {
     if (this.myCartItems.find((el) => el.id === book.id)) {
       this.myCartItems = this.myCartItems.map((item) =>
-        book.id === item.id ? { ...item, quantity: item.quantity + 1 } : item
+        book.id === item.id
+          ? { ...item, quantity: item.quantity + 1, isAvailable: !!(quantity - 1) }
+          : item,
       );
     } else {
-      this.myCartItems.push(book);
+      this.myCartItems.push({ ...book, quantity: 1 });
     }
   }
 
@@ -34,7 +37,7 @@ export class CartService {
       this.myCartItems = this.myCartItems.filter((el) => el.id !== book.id);
     } else {
       this.myCartItems = this.myCartItems.map((item) =>
-        book.id === item.id ? { ...item, quantity: item.quantity - 1 } : item
+        book.id === item.id ? { ...item, quantity: item.quantity - 1, isAvailable: true } : item,
       );
     }
   }

@@ -22,12 +22,7 @@
   </mat-card-content>
   <mat-card-actions class="dashboard-card-actions">
     <div>${{ book.price }}</div>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="!book.isAvailable"
-      (click)="onBuy(book)"
-    >
+    <button mat-raised-button color="primary" [disabled]="!book.isAvailable" (click)="onBuy(book)">
       Buy
     </button>
   </mat-card-actions>

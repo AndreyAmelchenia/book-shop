@@ -16,7 +16,7 @@ export class CartComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public myCartService: CartService,
-    public myBookService: BookService
+    public myBookService: BookService,
   ) {}
 
   ngOnInit() {
@@ -28,14 +28,13 @@ export class CartComponent implements OnInit {
     this.breakpointObserver
       .observe(Breakpoints.Handset)
       .pipe(
-        map(({ matches }) =>
-          matches ? this.myCartService.getAll() : this.myCartService.getAll()
-        )
+        map(({ matches }) => (matches ? this.myCartService.getAll() : this.myCartService.getAll())),
       );
 
   addBook(book: BookModel) {
-    this.myCartService.addCartItem(book);
+    this.myCartService.addCartItem(book, this.myBookService.quantityBook(book.id));
     this.cards = this.cardsInit();
+    this.myBookService.removeQuantityBook(book.id);
   }
 
   minesBook(book: BookModel) {

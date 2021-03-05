@@ -27,7 +27,7 @@ describe('BookListComponent', () => {
           MatMenuModule,
         ],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

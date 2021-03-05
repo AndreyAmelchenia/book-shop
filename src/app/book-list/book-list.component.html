@@ -1,6 +1,5 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Books</h1>
-  <h1>Summa: ${{ price }} Quantity: {{ quantity }}</h1>
+  <h1 class="mat-h1">Books<span>Cart: Summa: ${{price}} Quantity: {{quantity}}</span></h1>
   <mat-grid-list cols="3">
     <mat-grid-tile *ngFor="let card of cards | async">
       <app-book (bookOut)="sumPrise($event)" [book]="card"></app-book>

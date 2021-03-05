@@ -27,7 +27,7 @@ describe('BookNavComponent', () => {
           MatToolbarModule,
         ],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {
