@@ -25,7 +25,7 @@ export class BookListComponent implements OnInit {
 
   ngOnInit() {
     this.cards = this.cardsInit();
-    const carts = this.myCartService.getAll();
+    const carts = this.myCartService.cartProduct();
     this.price =
       carts.length !== 0 ? carts.reduce((acc, item) => acc + item.price * item.quantity, 0) : 0;
     this.quantity = carts.length !== 0 ? carts.reduce((acc, item) => acc + item.quantity, 0) : 0;
@@ -40,11 +40,11 @@ export class BookListComponent implements OnInit {
       );
 
   sumPrise(book: BookModel) {
-    const carts = this.myCartService.getAll();
+    const carts = this.myCartService.cartProduct();
     this.price =
       carts.length !== 0 ? carts.reduce((acc, item) => acc + item.price * item.quantity, 0) : 0;
     this.quantity = carts.length !== 0 ? carts.reduce((acc, item) => acc + item.quantity, 0) : 0;
-    this.myCartService.addCartItem(book, book.quantity);
+    this.myCartService.increaseQuantity(book, book.quantity);
     this.myBookService.removeQuantityBook(book.id);
     this.cards = this.cardsInit();
   }

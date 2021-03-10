@@ -15,6 +15,10 @@ import { AppMaterialModule } from './modules/app-material.module';
 
 import { BookService } from './services/book.service';
 import { CartService } from './services/cart.service';
+import { LocalStorageService } from './services/local-storage.service';
+import { ConfigOptionsService } from './services/config-options.service';
+import { NAME_APP_VERSION } from './services/constants.service';
+import { GeneratorServiceService } from './services/generator-service.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,14 @@ import { CartService } from './services/cart.service';
     AppMaterialModule,
     AppRoutingModule,
   ],
-  providers: [BookService, CartService],
+  providers: [
+    BookService,
+    CartService,
+    LocalStorageService,
+    ConfigOptionsService,
+    { provide: NAME_APP_VERSION, useValue: { App: 'TaskManager', Ver: '1.0' } },
+    GeneratorServiceService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

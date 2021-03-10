@@ -14,13 +14,19 @@ export class CartService {
     },
   ];
 
-  getAll = (): BookModel[] => this.myCartItems;
+  cartProduct = (): BookModel[] => this.myCartItems;
 
-  removeCartItem(book: BookModel): void {
+  totalQuantity = (): number =>
+    this.myCartItems.reduce((quantity, book) => quantity + book.quantity, 0);
+
+  totalSum = (): number =>
+    this.myCartItems.reduce((summa, book) => summa + book.price * book.quantity, 0);
+
+  removeBook(book: BookModel): void {
     this.myCartItems = this.myCartItems.filter((el) => el.id !== book.id);
   }
 
-  addCartItem(book: BookModel, quantity: number): void {
+  increaseQuantity(book: BookModel, quantity: number): void {
     if (this.myCartItems.find((el) => el.id === book.id)) {
       this.myCartItems = this.myCartItems.map((item) =>
         book.id === item.id
@@ -32,7 +38,7 @@ export class CartService {
     }
   }
 
-  minusCartItem(book: BookModel): void {
+  decreaseQuantity(book: BookModel): void {
     if (this.myCartItems.find((el) => el.id === book.id).quantity === 1) {
       this.myCartItems = this.myCartItems.filter((el) => el.id !== book.id);
     } else {
@@ -40,5 +46,13 @@ export class CartService {
         book.id === item.id ? { ...item, quantity: item.quantity - 1, isAvailable: true } : item,
       );
     }
+  }
+
+  removeAllBooks() {
+    this.myCartItems = [];
+  }
+
+  updateCartData(): { totalQuantity: number; totalSum: number } {
+    return { totalQuantity: this.totalQuantity(), totalSum: this.totalSum() };
   }
 }
